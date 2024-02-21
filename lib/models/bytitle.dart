@@ -8,7 +8,7 @@ class MovieResult {
 
 
   MovieResult.fromJson(Map<String, dynamic> json) {
-    title = json['title'].toInt();
+    title = int.parse(json['title']) as String;
     year = json['year'];
     imdbId = json['imdb_id'];
     search_results = json['search_results'];
@@ -34,7 +34,7 @@ class MovieSearchApiClient {
     baseUrl: 'https://movies-tv-shows-database.p.rapidapi.com/',
     headers: {
       'Type': 'get-movies-by-title',
-      'X-RapidAPI-Key': '9fcf40d969msh383854ae2619dfep1bd892jsn8f5fa3bb1907',
+      'X-RapidAPI-Key': '991a1779demshbb49135bb161b12p1c24b7jsn50d6ba889c63',
       'X-RapidAPI-Host': 'movies-tv-shows-database.p.rapidapi.com',
     },
   )
@@ -53,20 +53,3 @@ class MovieSearchApiClient {
     }
   }
 }
-
-// void main() async {
-//   final MovieSearchApiClient movieSearchApiClient = MovieSearchApiClient();
-//
-//   try {
-//     MovieSearchResponse response =
-//     await movieSearchApiClient.searchMoviesByTitle('Harry Potter');
-//     print('Search Results: ${response.searchResults}');
-//     print('Status: ${response.status}');
-//     print('Status Message: ${response.statusMessage}');
-//     response.movieResults.forEach((result) {
-//       print('Title: ${result.title}, Year: ${result.year}, IMDB ID: ${result.imdbId}');
-//     });
-//   } catch (e) {
-//     print('Error: $e');
-//   }
-// }

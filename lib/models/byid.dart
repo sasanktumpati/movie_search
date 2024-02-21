@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:dio/dio.dart';
 
 class Movie {
@@ -18,12 +20,12 @@ class Movie {
     title = json['title'];
     description = json['description'];
     tagline = json['tagline'];
-    year = json['year'].toDouble();
+    year = double.parse(json['year']);
     releaseDate = json['release_date'];
     imdbId = json['imdb_id'];
-    imdbRating = json['imdb_rating'].toDouble();
-    voteCount = json['vote_count'].toDouble();
-    popularity = json['popularity'].toDouble();
+    imdbRating = double.parse(json['imdb_rating']);
+    voteCount = double.parse(json['vote_count']);
+    popularity = double.parse(json['popularity']);
     youtubeTrailerKey = json['youtube_trailer_key'];
     rated = json['rated'];
   }
@@ -34,7 +36,7 @@ class MovieApiClient {
     baseUrl: 'https://movies-tv-shows-database.p.rapidapi.com/',
     headers: {
       'Type': 'get-movie-details',
-      'X-RapidAPI-Key': '9fcf40d969msh383854ae2619dfep1bd892jsn8f5fa3bb1907',
+      'X-RapidAPI-Key': '991a1779demshbb49135bb161b12p1c24b7jsn50d6ba889c63',
       'X-RapidAPI-Host': 'movies-tv-shows-database.p.rapidapi.com',
     },
   ));
