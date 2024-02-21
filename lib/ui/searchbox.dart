@@ -1,27 +1,21 @@
 import 'package:flutter/material.dart';
 
 class SearchBox extends StatelessWidget {
-  final TextEditingController controller;
-  final ValueChanged<String> onChanged;
+  final Function(String) onSearch;
 
-  const SearchBox({
-    Key? key,
-    required this.controller,
-    required this.onChanged,
-  }) : super(key: key);
+  SearchBox({required this.onSearch});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: EdgeInsets.all(16),
       child: TextField(
-        controller: controller,
-        onChanged: onChanged,
+        onChanged: onSearch,
         decoration: InputDecoration(
-          hintText: 'Search...',
+          hintText: 'Search movies by title',
           prefixIcon: Icon(Icons.search),
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10.0),
+            borderRadius: BorderRadius.circular(30),
           ),
         ),
       ),

@@ -4,11 +4,20 @@ class MovieResult {
   late var title;
   late int year;
   late String imdbId;
+  late String poster;
+  late String youtubeTrailerKey;
+  late double imdbRating;
+
+
 
   MovieResult({
     required this.title,
     required this.year,
     required this.imdbId,
+    required this.poster,
+    required this.youtubeTrailerKey,
+    required this.imdbRating,
+
   });
 
   factory MovieResult.fromJson(Map<String, dynamic> json) {
@@ -16,6 +25,9 @@ class MovieResult {
       title: json['title'],
       year: json['year'],
       imdbId: json['imdb_id'],
+      poster: json['poster'],
+      youtubeTrailerKey: json['youtubeTrailerKey'],
+      imdbRating: json['imdbRating'],
     );
   }
 }

@@ -1,74 +1,76 @@
 import 'package:flutter/material.dart';
-import '../logic/like.dart';
 import '../logic/star_rating.dart';
 import '../logic/yt_launcher.dart';
+import '../models/bytitle.dart';
+import '../models/moviedetails.dart';
 
 class MovieCard extends StatelessWidget {
-  final String title;
-  final String imageUrl;
-  final double imdbRating;
-  final String youtubeTrailerKey;
+  final MovieResult movie;
 
-  const MovieCard({
-    Key? key,
-    required this.title,
-    required this.imageUrl,
-    required this.imdbRating,
-    required this.youtubeTrailerKey,
-  }) : super(key: key);
+  MovieCard({required this.movie});
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 4.0,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12.0),
-      ),
-      child: InkWell(
-        borderRadius: BorderRadius.circular(12.0),
-        onTap: () {
-          // Handle card tap
-        },
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(12.0),
-              child: Image.network(
-                imageUrl,
-                fit: BoxFit.cover,
-                width: 120.0,
-                height: 120.0,
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => MovieDetailsPage(movieId: movie.imdbId),
+          ),
+        );
+      },
+      child: Card(
+        elevation: 4,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: Padding(
+          padding: EdgeInsets.all(16),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                flex: 1,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(12),
+                  child: Image.network(
+                    movie.poster,
+                    height: 150,
+                    fit: BoxFit.cover,
+                  ),
+                ),
               ),
-            ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(12.0),
+              SizedBox(width: 16),
+              Expanded(
+                flex: 2,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      title,
+                      movie.title,
                       style: TextStyle(
-                        fontSize: 18.0,
+                        fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: 8.0),
-                    StarRatingWidget(imdbRating: imdbRating),
-                    SizedBox(height: 8.0),
-                    Row(
-                      children: [
-                        LikeButton(),
-                        SizedBox(width: 8.0),
-                        TrailerButton(youtubeTrailerKey: youtubeTrailerKey),
-                      ],
+                    SizedBox(height: 8),
+                    Text(
+                      movie.year.toString(),
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.grey[600],
+                      ),
                     ),
+                    SizedBox(height: 8),
+                    StarRatingWidget(imdbRating: movie.imdbRating),
+                    SizedBox(height: 8),
+                    TrailerButton(youtubeTrailerKey: movie.youtubeTrailerKey),
                   ],
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
