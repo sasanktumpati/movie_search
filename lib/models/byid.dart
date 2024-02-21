@@ -4,25 +4,26 @@ class Movie {
   late String title;
   late String description;
   late String tagline;
-  late String year;
+  late double year;
   late String releaseDate;
   late String imdbId;
-  late String imdbRating;
-  late String voteCount;
-  late String popularity;
+  late double imdbRating;
+  late double voteCount;
+  late double popularity;
   late String youtubeTrailerKey;
   late String rated;
+
 
   Movie.fromJson(Map<String, dynamic> json) {
     title = json['title'];
     description = json['description'];
     tagline = json['tagline'];
-    year = json['year'];
+    year = json['year'].toDouble();
     releaseDate = json['release_date'];
     imdbId = json['imdb_id'];
-    imdbRating = json['imdb_rating'];
-    voteCount = json['vote_count'];
-    popularity = json['popularity'];
+    imdbRating = json['imdb_rating'].toDouble();
+    voteCount = json['vote_count'].toDouble();
+    popularity = json['popularity'].toDouble();
     youtubeTrailerKey = json['youtube_trailer_key'];
     rated = json['rated'];
   }

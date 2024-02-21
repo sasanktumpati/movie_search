@@ -4,11 +4,15 @@ class MovieResult {
   late String title;
   late int year;
   late String imdbId;
+  late int search_results;
+
 
   MovieResult.fromJson(Map<String, dynamic> json) {
-    title = json['title'];
+    title = json['title'].toInt();
     year = json['year'];
     imdbId = json['imdb_id'];
+    search_results = json['search_results'];
+
   }
 }
 
