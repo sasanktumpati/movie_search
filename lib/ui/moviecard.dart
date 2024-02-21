@@ -1,61 +1,74 @@
 import 'package:flutter/material.dart';
+import '../logic/like.dart';
+import '../logic/star_rating.dart';
+import '../logic/yt_launcher.dart';
 
 class MovieCard extends StatelessWidget {
   final String title;
   final String imageUrl;
-  final VoidCallback onPressed;
+  final double imdbRating;
+  final String youtubeTrailerKey;
 
-  MovieCard({super.key, required this.title, required this.imageUrl, required this.onPressed});
+  const MovieCard({
+    Key? key,
+    required this.title,
+    required this.imageUrl,
+    required this.imdbRating,
+    required this.youtubeTrailerKey,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Card(
+      elevation: 4.0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12.0),
+      ),
       child: InkWell(
-        onTap: onPressed,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            children: [
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.4,
-                child: AspectRatio(
-                  aspectRatio: 16 / 9,
-                  child: imageUrl.isNotEmpty
-                      ? Image.network(
-                    imageUrl,
-                    fit: BoxFit.cover,
-                  )
-                      : Container(),
-                ),
+        borderRadius: BorderRadius.circular(12.0),
+        onTap: () {
+          // Handle card tap
+        },
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(12.0),
+              child: Image.network(
+                imageUrl,
+                fit: BoxFit.cover,
+                width: 120.0,
+                height: 120.0,
               ),
-              SizedBox(width: 8.0),
-              Expanded(
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       title,
-                      style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     SizedBox(height: 8.0),
+                    StarRatingWidget(imdbRating: imdbRating),
+                    SizedBox(height: 8.0),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        ElevatedButton(
-                          onPressed: () {},
-                          child: Text('Like'),
-                        ),
-                        ElevatedButton(
-                          onPressed: () {},
-                          child: Text('Details'),
-                        ),
+                        LikeButton(),
+                        SizedBox(width: 8.0),
+                        TrailerButton(youtubeTrailerKey: youtubeTrailerKey),
                       ],
                     ),
                   ],
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

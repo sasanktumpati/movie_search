@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 
 class SearchBox extends StatelessWidget {
   final TextEditingController controller;
-  final Function(String) onChanged;
+  final ValueChanged<String> onChanged;
 
-  SearchBox({required this.controller, required this.onChanged});
+  const SearchBox({
+    Key? key,
+    required this.controller,
+    required this.onChanged,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,9 +18,11 @@ class SearchBox extends StatelessWidget {
         controller: controller,
         onChanged: onChanged,
         decoration: InputDecoration(
-          hintText: 'Search movies...',
+          hintText: 'Search...',
           prefixIcon: Icon(Icons.search),
-          border: OutlineInputBorder(),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          ),
         ),
       ),
     );

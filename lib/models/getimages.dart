@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 
 class Images {
@@ -5,33 +7,38 @@ class Images {
   late String poster;
   late String fanart;
 
+  Images({
+    required this.title,
+    required this.poster,
+    required this.fanart,
+  });
 
-  Images.fromJson(Map<String, dynamic> json) {
-    title = json['title'];
-    poster = json["poster"];
-    fanart = json["fanart"];
-
+  factory Images.fromJson(Map<String, dynamic> json) {
+    return Images(
+      title: json['title'],
+      poster: json["poster"],
+      fanart: json["fanart"],
+    );
   }
-
 }
 
 class ImagesAPIclient {
-  final Dio imageurls = Dio(BaseOptions(
+  final Dio _dio = Dio(BaseOptions(
     baseUrl: 'https://movies-tv-shows-database.p.rapidapi.com/',
     headers: {
       'Type': 'get-movies-images-by-imdb',
       'X-RapidAPI-Key': '991a1779demshbb49135bb161b12p1c24b7jsn50d6ba889c63',
       'X-RapidAPI-Host': 'movies-tv-shows-database.p.rapidapi.com',
     },
-
   ));
 
   Future<Images> getImages(String movieId) async {
     try {
-      final response = await imageurls.get(
-          '', queryParameters: {'movieId': movieId});
+      final response = await _dio.get('', queryParameters: {'movieId': movieId});
       if (response.statusCode == 200) {
-        return Images.fromJson(response.data);
+        final responseData = json.decode(response.data);
+        print(responseData);
+        return Images.fromJson(responseData);
       } else {
         throw Exception('Failed to load Images');
       }

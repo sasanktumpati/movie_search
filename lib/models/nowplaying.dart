@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 
 class NowPlaying {
@@ -6,12 +8,20 @@ class NowPlaying {
   late String imdbId;
   late int results;
 
-  NowPlaying.fromJson(Map<String, dynamic> json) {
-    title = json['title'];
-    year = int.parse(json['year']);
-    imdbId = json['imdb_id'];
-    results = int.parse(json['results']);
+  NowPlaying({
+    required this.title,
+    required this.year,
+    required this.imdbId,
+    required this.results,
+  });
 
+  factory NowPlaying.fromJson(Map<String, dynamic> json) {
+    return NowPlaying(
+      title: json['title'],
+      year: int.parse(json['year']),
+      imdbId: json['imdb_id'],
+      results: int.parse(json['results']),
+    );
   }
 }
 
@@ -21,13 +31,23 @@ class NowPlayingResponse {
   late String status;
   late String statusMessage;
 
-  NowPlayingResponse.fromJson(Map<String, dynamic> json) {
-    movieResults = (json['movie_results'] as List)
+  NowPlayingResponse({
+    required this.movieResults,
+    required this.totalResults,
+    required this.status,
+    required this.statusMessage,
+  });
+
+  factory NowPlayingResponse.fromJson(Map<String, dynamic> json) {
+    List<NowPlaying> results = (json['movie_results'] as List)
         .map((result) => NowPlaying.fromJson(result))
         .toList();
-    totalResults = json['Total_results'];
-    status = json['status'];
-    statusMessage = json['status_message'];
+    return NowPlayingResponse(
+      movieResults: results,
+      totalResults: json['Total_results'],
+      status: json['status'],
+      statusMessage: json['status_message'],
+    );
   }
 }
 
@@ -45,7 +65,9 @@ class NowPlayingApiClient {
     try {
       final response = await _dio.get('');
       if (response.statusCode == 200) {
-        return NowPlayingResponse.fromJson(response.data);
+        final responseData = json.decode(response.data);
+        print(responseData); // Print response data
+        return NowPlayingResponse.fromJson(responseData);
       } else {
         throw Exception('Failed to fetch now playing movies');
       }

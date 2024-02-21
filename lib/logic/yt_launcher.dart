@@ -5,10 +5,10 @@ Future<void> openTrailer(String youtubeTrailerKey) async {
   String url = 'https://www.youtube.com/watch?v=$youtubeTrailerKey';
 
   if (url.isNotEmpty) {
-    if (await canLaunchUrl(url as Uri)) {
-      await launchUrl(url as Uri);
+    if (await canLaunch(url)) {
+      await launch(url);
     } else {
-      throw 'Could Not launch $url ';
+      throw 'Could Not launch $url';
     }
   }
 }
@@ -23,8 +23,10 @@ class TrailerButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: () => openTrailer(youtubeTrailerKey),
       style: ElevatedButton.styleFrom(
-        foregroundColor: Colors.black,
-        backgroundColor: Colors.white,
+        foregroundColor: Colors.black, backgroundColor: Colors.white, shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12.0),
+        ),
+        elevation: 4.0,
       ),
       child: Text('Watch Trailer'),
     );

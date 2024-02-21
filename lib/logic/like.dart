@@ -44,4 +44,3 @@ class _LikeButton extends StatelessWidget {
     );
   }
 }
-
