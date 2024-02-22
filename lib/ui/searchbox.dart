@@ -5,13 +5,38 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../models/moviesprovider.dart';
 import 'home.dart';
+
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(
+    ProviderScope(
+      child: MyApp(),
+    ),
+  );
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Your App Title',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+
+      home: ProviderScope(
+        child: SearchScreen(),
+      ),
+    );
+  }
+}
+
 class SearchScreen extends ConsumerWidget {
   const SearchScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext ctx, WidgetRef ref) {
     final searchText = ref.watch(searchInputTextProvider);
-
     final moviesList = ref.watch(getMoviesByNameProvider(searchText));
 
     return Scaffold(
@@ -59,4 +84,3 @@ class SearchScreen extends ConsumerWidget {
     );
   }
 }
-

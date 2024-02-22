@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:movie_search/models/byid.dart';
 
 class LikeButton extends StatelessWidget {
   final String imdbId;

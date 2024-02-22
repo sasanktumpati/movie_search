@@ -45,7 +45,7 @@ class MovieDetails extends ConsumerWidget {
                           data: (data) => Image.network(
                             data.poster != null
                                 ? data.poster!
-                                : 'https://www.indieactivity.com/wp-content/uploads/2022/03/File-Not-Found-Poster.png',
+                                : 'https://i.ibb.co/S794thq/2.jpg',
                             gaplessPlayback: true,
                           ),
                           error: (error, stackTrace) =>
@@ -57,7 +57,7 @@ class MovieDetails extends ConsumerWidget {
                           data: (d) => Image.network(
                             d.fanart != null
                                 ? d.fanart!
-                                : 'https://www.indieactivity.com/wp-content/uploads/2022/03/File-Not-Found-Poster.png',
+                                : 'https://i.ibb.co/S794thq/2.jpg',
                             gaplessPlayback: true,
                           ),
                           error: (error, stackTrace) =>
@@ -80,9 +80,9 @@ class MovieDetails extends ConsumerWidget {
                       },
                       tooltip: "Play Trailer",
                       icon: const Icon(
-                        Icons.local_movies_outlined,
+                        Icons.play_circle_fill,
                         size: 80,
-                        color: Colors.red,
+                        color: Colors.white,
                       ),
                     )
                   ],
@@ -104,40 +104,50 @@ class MovieDetails extends ConsumerWidget {
                         Text(
                           data.tagline != null
                               ? data.tagline!
-                              : "TagLine not Available",
-                          style: TextStyle(color: Colors.red),
+                              : "Tagline not Available",
+                          style: GoogleFonts.poppins(
+                            fontSize: 30,
+                            color: Colors.black,
+                          ),
                         ),
                         data.rated != null
                             ? Center(
-                          child: StarRatingWidget(
-                            imdbRating: double.parse(data.imdbRating!),
-                          ),
+                          child: StarRatingWidget(imdbRating: double.parse(data.imdbRating!)),
                         )
-                            : const Text(
+                            :  Text(
                           "Not Available",
-                          style: TextStyle(color: Colors.black),
+                          style: GoogleFonts.poppins(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 30,
+                            color: Colors.black,
+                          ),
                         ),
                         const SizedBox(height: 40),
                         Text(
                           data.description != null
                               ? data.description!
                               : "Not Available",
-                          style: TextStyle(color: Colors.black54),
+                          style: GoogleFonts.poppins(
+                            fontSize: 20,
+                            color: Colors.black,
+                          ),
                         ),
                         Text(
                           data.rated != null
                               ? "Age Rating: ${data.rated!}"
                               : "Not Available",
-                          style: TextStyle(
-                            color: Colors.black,
+                          style: GoogleFonts.poppins(
                             fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            color: Colors.black,
                           ),
                         ),
                         Text(
                           "Release Date: ${formatter.format(data.releaseDate)}",
-                          style: TextStyle(
-                            color: Colors.black,
+                          style: GoogleFonts.poppins(
                             fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            color: Colors.black,
                           ),
                         ),
                       ],
