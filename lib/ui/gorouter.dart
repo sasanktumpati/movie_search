@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movie_search/ui/searchbox.dart';
+import 'package:movie_search/ui/splash.dart';
 
 import 'details.dart';
 import 'home.dart';
@@ -27,8 +28,12 @@ class Routing extends StatelessWidget {
 }
 
 final _router = GoRouter(
-  initialLocation: '/',
+  initialLocation: '/splash',
   routes: [
+    GoRoute(
+      path: '/splash',
+      builder: (context, state) => SplashScreen(),
+    ),
     GoRoute(
       path: '/',
       builder: (context, state) => const HomeScreen(),
