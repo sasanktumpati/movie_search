@@ -1,14 +1,13 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class MovieResult {
-  late var title;
+  late String title;
   late int year;
   late String imdbId;
   late String poster;
   late String youtubeTrailerKey;
   late double imdbRating;
-
-
 
   MovieResult({
     required this.title,
@@ -17,7 +16,6 @@ class MovieResult {
     required this.poster,
     required this.youtubeTrailerKey,
     required this.imdbRating,
-
   });
 
   factory MovieResult.fromJson(Map<String, dynamic> json) {
@@ -52,7 +50,27 @@ class MovieSearchResponse {
   }
 }
 
+final dioProvider = Provider<Dio>((ref) {
+  return Dio(BaseOptions(
+    baseUrl: 'https://movies-tv-shows-database.p.rapidapi.com/',
+    headers: {
+      'Type': 'get-movies-by-title',
+      'X-RapidAPI-Key': '9fcf40d969msh383854ae2619dfep1bd892jsn8f5fa3bb1907',
+      'X-RapidAPI-Host': 'movies-tv-shows-database.p.rapidapi.com',
+    },
+  ));
+});
+
+final movieSearchApiClientProvider = Provider<MovieSearchApiClient>((ref) {
+  final dio = ref.watch(dioProvider);
+  return MovieSearchApiClient(dio);
+});
+
 class MovieSearchApiClient {
+  final Dio _dio;
+
+  MovieSearchApiClient(this._dio);
+
   Future<MovieSearchResponse> searchMoviesByTitle(String title) async {
     try {
       final response = await _fetchMoviesByTitle(title);
@@ -72,19 +90,18 @@ class MovieSearchApiClient {
       'method': 'GET',
       'url': 'https://movies-tv-shows-database.p.rapidapi.com/',
       'params': {'title': title},
-      'headers': {
-        'Type': 'get-movies-by-title',
-        'X-RapidAPI-Key': '9fcf40d969msh383854ae2619dfep1bd892jsn8f5fa3bb1907',
-        'X-RapidAPI-Host': 'movies-tv-shows-database.p.rapidapi.com',
-      },
     };
     try {
-      final response = await Dio().request(
+      final response = await _dio.request(
         options['url'],
         queryParameters: options['params'],
         options: Options(
           method: options['method'],
-          headers: options['headers'],
+          headers: {
+            'Type': 'get-movies-by-title',
+            'X-RapidAPI-Key': '9fcf40d969msh383854ae2619dfep1bd892jsn8f5fa3bb1907',
+            'X-RapidAPI-Host': 'movies-tv-shows-database.p.rapidapi.com',
+          },
         ),
       );
       return response;
