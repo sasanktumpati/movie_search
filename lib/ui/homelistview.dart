@@ -1,11 +1,15 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
-import '../models/moviedetails.dart';
+import '../models/moviesprovider.dart';
 import '../models/nowplaying.dart';
 import 'moviecard.dart';
 
 class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Now Playing Movies'),
@@ -33,37 +37,33 @@ class Home extends StatelessWidget {
             ),
             SizedBox(height: 20.0),
             Expanded(
-              child: _buildNowPlayingMovies(),
+              child: FutureBuilder<NowPlayingMovie>(
+                future: Future.value(NowPlayingMovie),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(child: CircularProgressIndicator());
+                  } else if (snapshot.hasError) {
+                    return Center(child: Text('Error: ${snapshot.error}'));
+                  } else if (!snapshot.hasData) {
+                    return Center(child: Text('No Data'));
+                  } else {
+                    final movies = snapshot.data!.movieResults;
+                    return ListView.builder(
+                      itemCount: movies.length,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: EdgeInsets.only(bottom: 20.0),
+                          child: MovieCard(movieId: movies[index].imdbId),
+                        );
+                      },
+                    );
+                  }
+                },
+              ),
             ),
           ],
         ),
       ),
-    );
-  }
-
-  Widget _buildNowPlayingMovies() {
-    return FutureBuilder<NowPlayingMovies?>(
-      future: MovieProvider.getNowPlayingMovies(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(child: CircularProgressIndicator());
-        } else if (snapshot.hasError) {
-          return Center(child: Text('Error: ${snapshot.error}'));
-        } else if (snapshot.data == null) {
-          return Center(child: Text('No Data'));
-        } else {
-          final movies = snapshot.data!.movies;
-          return ListView.builder(
-            itemCount: movies.length,
-            itemBuilder: (context, index) {
-              return Padding(
-                padding: EdgeInsets.only(bottom: 20.0),
-                child: MovieCard(movieId: movies[index].imdbId),
-              );
-            },
-          );
-        }
-      },
     );
   }
 }
