@@ -21,7 +21,7 @@ class HomeScreen extends ConsumerWidget {
         leading: null,
         toolbarHeight: 100,
         backgroundColor: Colors.white,
-        title: SearchBox(),
+        title: const SearchBox(),
       ),
       body: nowPlayingMovies.when(
         data: (data) {
@@ -36,7 +36,7 @@ class HomeScreen extends ConsumerWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Expanded(
                 child: GridView.builder(
                   physics: const PageScrollPhysics(),
@@ -87,7 +87,7 @@ class HomeScreen extends ConsumerWidget {
                                         child: CircularProgressIndicator()),
                                   ),
                                 ),
-                                SizedBox(height: 10),
+                                const SizedBox(height: 10),
                                 Text(
                                   movie[index].title,
                                   style: GoogleFonts.poppins(

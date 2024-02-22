@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../models/moviesprovider.dart';
 import 'home.dart';
@@ -24,7 +23,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
 
-      home: ProviderScope(
+      home: const ProviderScope(
         child: SearchScreen(),
       ),
     );
@@ -47,7 +46,7 @@ class SearchScreen extends ConsumerWidget {
           },
           icon: const Icon(Icons.arrow_back_outlined),
         ),
-        title: SearchBox(),
+        title: const SearchBox(),
       ),
       body: moviesList.when(
         data: (data) {
