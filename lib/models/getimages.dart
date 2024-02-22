@@ -1,61 +1,50 @@
 import 'dart:convert';
-
-import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:http/http.dart' as http;
 
-class Images {
+class MovieImage {
   late String title;
   late String poster;
   late String fanart;
 
-  Images({
+  MovieImage({
     required this.title,
     required this.poster,
     required this.fanart,
   });
 
-  factory Images.fromJson(Map<String, dynamic> json) {
-    return Images(
-      title: json['title'],
-      poster: json["poster"],
-      fanart: json["fanart"],
+  factory MovieImage.fromJson(Map<String, dynamic> json) {
+    return MovieImage(
+      title: json['title'] ?? '', // Handle null value
+      poster: json['poster'] ?? '', // Handle null value
+      fanart: json['fanart'] ?? '', // Handle null value
     );
   }
 }
 
-final dioProvider = Provider<Dio>((ref) {
-  return Dio(BaseOptions(
-    baseUrl: 'https://movies-tv-shows-database.p.rapidapi.com/',
-    headers: {
+final movieImagesProvider = FutureProvider.family<MovieImage, String>((ref, movieId) async {
+  try {
+    var headers = {
       'Type': 'get-movies-images-by-imdb',
-      'X-RapidAPI-Key': '9fcf40d969msh383854ae2619dfep1bd892jsn8f5fa3bb1907',
+      'X-RapidAPI-Key': '95f22c543bmsh3ded0bb854a345cp17f572jsn87b22fa04bb9',
       'X-RapidAPI-Host': 'movies-tv-shows-database.p.rapidapi.com',
-    },
-  ));
-});
+    };
 
-final imagesApiClientProvider = Provider<ImagesAPIclient>((ref) {
-  final dio = ref.watch(dioProvider);
-  return ImagesAPIclient(dio);
-});
+    var uri = Uri.https('movies-tv-shows-database.p.rapidapi.com', '/', {'movieid': movieId});
 
-class ImagesAPIclient {
-  final Dio _dio;
+    var response = await http.get(uri, headers: headers);
 
-  ImagesAPIclient(this._dio);
-
-  Future<Images> getImages(String movieId) async {
-    try {
-      final response = await _dio.get('', queryParameters: {'movieId': movieId});
-      if (response.statusCode == 200) {
-        final responseData = json.decode(response.data);
-        print(responseData);
-        return Images.fromJson(responseData);
+    if (response.statusCode == 200) {
+      var responseData = jsonDecode(response.body);
+      if (responseData != null) {
+        return MovieImage.fromJson(responseData);
       } else {
-        throw Exception('Failed to load Images');
+        throw Exception('Response data is null');
       }
-    } catch (e) {
-      throw Exception('Failed to load Images: $e');
+    } else {
+      throw Exception('Failed to load Images. Status Code: ${response.statusCode}');
     }
+  } catch (e) {
+    throw Exception('Failed to load Images: $e');
   }
-}
+});

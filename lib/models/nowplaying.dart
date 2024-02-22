@@ -1,89 +1,61 @@
 import 'dart:convert';
-import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:http/http.dart' as http;
 
-class NowPlaying {
+import 'byid.dart';
+
+class NowPlayingMovies {
   late String title;
-  late int year;
+  late int year; // Assuming year is an integer
   late String imdbId;
   late int results;
+  late List<MovieById> movies; // Added movies field
 
-  NowPlaying({
+  NowPlayingMovies({
     required this.title,
     required this.year,
     required this.imdbId,
     required this.results,
+    required this.movies,
   });
 
-  factory NowPlaying.fromJson(Map<String, dynamic> json) {
-    return NowPlaying(
-      title: json['title'],
-      year: int.parse(json['year']),
-      imdbId: json['imdb_id'],
-      results: int.parse(json['results']),
-    );
-  }
-}
-
-class NowPlayingResponse {
-  late List<NowPlaying> movieResults;
-  late String totalResults;
-  late String status;
-  late String statusMessage;
-
-  NowPlayingResponse({
-    required this.movieResults,
-    required this.totalResults,
-    required this.status,
-    required this.statusMessage,
-  });
-
-  factory NowPlayingResponse.fromJson(Map<String, dynamic> json) {
-    List<NowPlaying> results = (json['movie_results'] as List)
-        .map((result) => NowPlaying.fromJson(result))
+  factory NowPlayingMovies.fromJson(Map<String, dynamic> json) {
+    final List<MovieById> moviesList = (json['movies'] as List)
+        .map((movieJson) => MovieById.fromJson(movieJson))
         .toList();
-    return NowPlayingResponse(
-      movieResults: results,
-      totalResults: json['Total_results'],
-      status: json['status'],
-      statusMessage: json['status_message'],
+    return NowPlayingMovies(
+      title: json['title'] ?? '',
+      year: int.parse(json['year'] ?? '0'),
+      imdbId: json['imdb_id'] ?? '',
+      results: int.parse(json['results'] ?? '0'),
+      movies: moviesList,
     );
   }
 }
 
-final dioProvider = Provider<Dio>((ref) {
-  return Dio(BaseOptions(
-    baseUrl: 'https://movies-tv-shows-database.p.rapidapi.com/',
-    headers: {
+final nowMoviesProvider = FutureProvider<NowPlayingMovies>((ref) async {
+  try {
+    var headers = {
       'Type': 'get-nowplaying-movies',
-      'X-RapidAPI-Key': '9fcf40d969msh383854ae2619dfep1bd892jsn8f5fa3bb1907',
+      'X-RapidAPI-Key': '95f22c543bmsh3ded0bb854a345cp17f572jsn87b22fa04bb9',
       'X-RapidAPI-Host': 'movies-tv-shows-database.p.rapidapi.com',
-    },
-  ));
-});
+    };
 
-final nowPlayingApiClientProvider = Provider<NowPlayingApiClient>((ref) {
-  final dio = ref.watch(dioProvider);
-  return NowPlayingApiClient(dio);
-});
+    var uri = Uri.https('movies-tv-shows-database.p.rapidapi.com', '/', {'page': '1'});
 
-class NowPlayingApiClient {
-  final Dio _dio;
+    var response = await http.get(uri, headers: headers);
 
-  NowPlayingApiClient(this._dio);
-
-  Future<NowPlayingResponse> getNowPlayingMovies() async {
-    try {
-      final response = await _dio.get('');
-      if (response.statusCode == 200) {
-        final responseData = json.decode(response.data);
-        print(responseData); // Print response data
-        return NowPlayingResponse.fromJson(responseData);
+    if (response.statusCode == 200) {
+      var responseData = jsonDecode(response.body);
+      if (responseData != null) {
+        return NowPlayingMovies.fromJson(responseData);
       } else {
-        throw Exception('Failed to fetch now playing movies');
+        throw Exception('Response data is null');
       }
-    } catch (e) {
-      throw Exception('Failed to fetch now playing movies: $e');
+    } else {
+      throw Exception('Failed to fetch now playing movies. Status code: ${response.statusCode}');
     }
+  } catch (e) {
+    throw Exception('Failed to fetch now playing movies: $e');
   }
-}
+});

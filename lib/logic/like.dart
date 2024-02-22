@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LikeButton extends StatelessWidget {
+  const LikeButton({super.key});
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(

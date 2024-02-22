@@ -4,8 +4,8 @@ Future<void> openTrailer(String youtubeTrailerKey) async {
   String url = 'https://www.youtube.com/watch?v=$youtubeTrailerKey';
 
   if (url.isNotEmpty) {
-    if (await canLaunch(url)) {
-      await launch(url);
+    if (await canLaunchUrl(url as Uri)) {
+      await launchUrl(url as Uri);
     } else {
       throw 'Could Not launch $url';
     }
