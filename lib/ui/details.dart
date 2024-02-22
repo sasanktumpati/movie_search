@@ -10,16 +10,16 @@ import '../models/byid.dart';
 import '../models/getimages.dart';
 import '../models/moviesprovider.dart';
 
-class MovieDetails extends ConsumerWidget {
-  const MovieDetails({Key? key}) : super(key: key);
+class Details_page extends ConsumerWidget {
+  const Details_page({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final String imdbID = ref.watch(movieSelectedProvider);
-    final AsyncValue<MovieById> movieDetails =
+    final String imdbID = ref.watch(SelectionProvider);
+    final AsyncValue<MoviesById> movieDetails =
     ref.watch(getMoviesByIDProvider(imdbID));
-    final AsyncValue<MovieImage> images =
-    ref.watch(movieImagesProvider(imdbID));
+    final AsyncValue<MovieImages> images =
+    ref.watch(ImagesProvider(imdbID));
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -29,7 +29,7 @@ class MovieDetails extends ConsumerWidget {
       body: Container(
         padding: const EdgeInsets.symmetric(vertical: 40),
         decoration: BoxDecoration(
-          backgroundBlendMode: BlendMode.darken,
+          backgroundBlendMode: BlendMode.lighten,
           color: Colors.white70,
         ),
         child: movieDetails.when(
@@ -82,7 +82,7 @@ class MovieDetails extends ConsumerWidget {
                       icon: const Icon(
                         Icons.play_circle_fill,
                         size: 80,
-                        color: Colors.white,
+                        color: Colors.black
                       ),
                     )
                   ],
@@ -172,7 +172,7 @@ void main() {
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   runApp(
     const ProviderScope(
-      child: MovieDetails(),
+      child: Details_page(),
     ),
   );
 }

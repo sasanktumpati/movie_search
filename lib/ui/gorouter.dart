@@ -5,8 +5,8 @@ import 'package:movie_search/ui/searchbox.dart';
 import 'details.dart';
 import 'home.dart';
 
-class MainScreen extends StatelessWidget {
-  const MainScreen({Key? key});
+class Routing extends StatelessWidget {
+  const Routing({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -34,16 +34,16 @@ final _router = GoRouter(
       builder: (context, state) => const HomeScreen(),
     ),
     GoRoute(
-      path: '/page2',
-      builder: (context, state) => const MovieDetails(),
+      path: '/details',
+      builder: (context, state) => const Details_page(),
     ),
     GoRoute(
-      path: '/searchPage',
+      path: '/search',
       builder: (context, state) => const SearchScreen(),
     ),
   ],
 );
 
 void main() {
-  runApp(const MainScreen());
+  runApp(const Routing());
 }

@@ -1,42 +1,42 @@
 import 'dart:convert';
 
-MovieByTitle movieByTitleFromJson(String str) =>
-    MovieByTitle.fromJson(json.decode(str));
+Moviesbytitle movieByTitleFromJson(String str) =>
+    Moviesbytitle.fromJson(json.decode(str));
 
-class MovieByTitle {
-  final List<MovieResult>? movieResults;
+class Moviesbytitle {
+  final List<bytitleResults>? movieResults;
   final int? searchResults;
   final String status;
   final String statusMessage;
 
-  MovieByTitle({
+  Moviesbytitle({
     required this.movieResults,
     required this.searchResults,
     required this.status,
     required this.statusMessage,
   });
 
-  factory MovieByTitle.fromJson(Map<String, dynamic> json) => MovieByTitle(
-    movieResults: List<MovieResult>.from(
-        json["movie_results"].map((x) => MovieResult.fromJson(x))),
+  factory Moviesbytitle.fromJson(Map<String, dynamic> json) => Moviesbytitle(
+    movieResults: List<bytitleResults>.from(
+        json["movie_results"].map((x) => bytitleResults.fromJson(x))),
     searchResults: json["search_results"],
     status: json["status"],
     statusMessage: json["status_message"],
   );
 }
 
-class MovieResult {
+class bytitleResults {
   final String? title;
   final int? year;
   final String? imdbId;
 
-  MovieResult({
+  bytitleResults({
     required this.title,
     required this.year,
     required this.imdbId,
   });
 
-  factory MovieResult.fromJson(Map<String, dynamic> json) => MovieResult(
+  factory bytitleResults.fromJson(Map<String, dynamic> json) => bytitleResults(
     title: json["title"],
     year: json["year"],
     imdbId: json["imdb_id"],

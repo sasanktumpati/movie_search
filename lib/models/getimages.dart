@@ -1,16 +1,16 @@
 
 import 'dart:convert';
 
-MovieImage movieImageFromJson(String str) =>
-    MovieImage.fromJson(json.decode(str));
+MovieImages movieImageFromJson(String str) =>
+    MovieImages.fromJson(json.decode(str));
 
-class MovieImage {
+class MovieImages {
   final String? title;
   final String? imdb;
   final String? poster;
   final String? fanart;
 
-  MovieImage({
+  MovieImages({
     required this.title,
     required this.imdb,
     required this.poster,
@@ -18,7 +18,7 @@ class MovieImage {
 
   });
 
-  factory MovieImage.fromJson(Map<String, dynamic> json) => MovieImage(
+  factory MovieImages.fromJson(Map<String, dynamic> json) => MovieImages(
     title: json["title"],
     imdb: json["IMDB"],
     poster: json["poster"],

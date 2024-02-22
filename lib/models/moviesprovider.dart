@@ -8,8 +8,8 @@ import 'bytitle.dart';
 import 'getimages.dart';
 import 'nowplaying.dart';
 
-final movieImagesProvider =
-FutureProvider.family<MovieImage, String>((ref, movieId) async {
+final ImagesProvider =
+FutureProvider.family<MovieImages, String>((ref, movieId) async {
   var headers = {
     'Type': 'get-movies-images-by-imdb',
     'X-RapidAPI-Key': 'bb72b850f0msh562c04851d0f1a1p1a0ebcjsn813c727955e4',
@@ -24,15 +24,15 @@ FutureProvider.family<MovieImage, String>((ref, movieId) async {
   if (response.statusCode == 200) {
     var responseData = jsonDecode(response.body);
     print('Movie images response: $responseData');
-    return MovieImage.fromJson(responseData);
+    return MovieImages.fromJson(responseData);
   } else {
-    throw Exception('Failed to load movie images');
+    throw Exception('Failed to load images');
   }
 });
 
 
 
-final nowMoviesProvider = FutureProvider<NowPlayingMovie>((ref) async {
+final nowPlayingProvider = FutureProvider<NowPlayingMovies>((ref) async {
   var headers = {
     'Type': 'get-nowplaying-movies',
     'X-RapidAPI-Key': 'bb72b850f0msh562c04851d0f1a1p1a0ebcjsn813c727955e4',
@@ -47,14 +47,14 @@ final nowMoviesProvider = FutureProvider<NowPlayingMovie>((ref) async {
   if (response.statusCode == 200) {
     var responseData = jsonDecode(response.body);
     print('Now playing movies response: $responseData');
-    return NowPlayingMovie.fromJson(responseData);
+    return NowPlayingMovies.fromJson(responseData);
   } else {
     throw Exception('Failed to fetch now playing movies');
   }
 });
 
 final getMoviesByNameProvider =
-FutureProvider.family<MovieByTitle, String>((ref, inputText) async {
+FutureProvider.family<Moviesbytitle, String>((ref, inputText) async {
   var headers = {
     'Type': 'get-movies-by-title',
     'X-RapidAPI-Key': 'bb72b850f0msh562c04851d0f1a1p1a0ebcjsn813c727955e4',
@@ -69,16 +69,16 @@ FutureProvider.family<MovieByTitle, String>((ref, inputText) async {
   if (response.statusCode == 200) {
     var responseData = jsonDecode(response.body);
     print('Movies by title response: $responseData');
-    return MovieByTitle.fromJson(responseData);
+    return Moviesbytitle.fromJson(responseData);
   } else {
     throw Exception('Failed to fetch movies by title');
   }
 });
 
-final movieSelectedProvider = StateProvider((ref) => "");
+final SelectionProvider = StateProvider((ref) => "");
 
 final getMoviesByIDProvider =
-FutureProvider.family<MovieById, String>((ref, imdbID) async {
+FutureProvider.family<MoviesById, String>((ref, imdbID) async {
   var headers = {
     'Type': 'get-movie-details',
     'X-RapidAPI-Key': 'bb72b850f0msh562c04851d0f1a1p1a0ebcjsn813c727955e4',
@@ -93,18 +93,18 @@ FutureProvider.family<MovieById, String>((ref, imdbID) async {
   if (response.statusCode == 200) {
     var responseData = jsonDecode(response.body);
     print('Movie details response: $responseData');
-    return MovieById.fromJson(responseData);
+    return MoviesById.fromJson(responseData);
   } else {
     throw Exception('Failed to load movie details');
   }
 });
 
-class MovieRepository {
+class Repo {
   final String movieTitle;
 
-  MovieRepository({required this.movieTitle});
+  Repo({required this.movieTitle});
 
-  Future<MovieByTitle> fetchMoviesData() async {
+  Future<Moviesbytitle> fetchMoviesData() async {
     var headers = {
       'Type': 'get-movies-by-title',
       'X-RapidAPI-Key': 'bb72b850f0msh562c04851d0f1a1p1a0ebcjsn813c727955e4',
@@ -119,11 +119,11 @@ class MovieRepository {
     if (response.statusCode == 200) {
       var responseData = jsonDecode(response.body);
       print('Fetch movies data response: $responseData');
-      return MovieByTitle.fromJson(responseData);
+      return Moviesbytitle.fromJson(responseData);
     } else {
       throw Exception('Failed to fetch movies by title');
     }
   }
 }
 
-final searchInputTextProvider = StateProvider((ref) => "");
+final searchQuery = StateProvider((ref) => "");

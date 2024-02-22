@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Your App Title',
+      title: 'Movie Search',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -36,7 +36,7 @@ class SearchScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext ctx, WidgetRef ref) {
-    final searchText = ref.watch(searchInputTextProvider);
+    final searchText = ref.watch(searchQuery);
     final moviesList = ref.watch(getMoviesByNameProvider(searchText));
 
     return Scaffold(
@@ -68,8 +68,8 @@ class SearchScreen extends ConsumerWidget {
                         : "",
                   ),
                   onTap: () {
-                    context.push("/page2");
-                    ref.watch(movieSelectedProvider.notifier).update(
+                    context.push("/details");
+                    ref.watch(SelectionProvider.notifier).update(
                           (state) => data.movieResults![index].imdbId!,
                     );
                   },

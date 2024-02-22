@@ -13,7 +13,7 @@ class HomeScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final nowPlayingMovies = ref.watch(nowMoviesProvider);
+    final nowPlayingMovies = ref.watch(nowPlayingProvider);
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -46,12 +46,12 @@ class HomeScreen extends ConsumerWidget {
                     final String movieId = movie[index].imdbId;
 
                     final movieImage =
-                    ref.watch(movieImagesProvider(movieId));
+                    ref.watch(ImagesProvider(movieId));
 
                     return GestureDetector(
                       onTap: () {
-                        context.go('/page2');
-                        ref.watch(movieSelectedProvider.notifier).update(
+                        context.go('/details');
+                        ref.watch(SelectionProvider.notifier).update(
                               (state) => movie[index].imdbId,
                         );
                       },
@@ -167,7 +167,7 @@ class SearchBox extends ConsumerWidget {
       child: TextField(
         autofocus: true,
         onChanged: (value) {
-          ref.watch(searchInputTextProvider.notifier).update((state) => value);
+          ref.watch(searchQuery.notifier).update((state) => value);
         },
         decoration: InputDecoration(
           icon: const Icon(Icons.search),

@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:intl/intl.dart';
 
 
-class MovieById {
+class MoviesById {
   final String? title;
   final String? description;
   final String? tagline;
@@ -15,7 +15,7 @@ class MovieById {
   final String status;
   final String statusMessage;
 
-  MovieById({
+  MoviesById({
     required this.title,
     required this.description,
     required this.tagline,
@@ -29,7 +29,7 @@ class MovieById {
     required this.statusMessage,
   });
 
-  factory MovieById.fromJson(Map<String, dynamic> json) => MovieById(
+  factory MoviesById.fromJson(Map<String, dynamic> json) => MoviesById(
     title: json["title"],
     description: json["description"],
     tagline: json["tagline"],
@@ -49,7 +49,7 @@ class MovieById {
 }
 
 
-MovieById movieByIdFromJson(String str) => MovieById.fromJson(json.decode(str));
+MoviesById movieByIdFromJson(String str) => MoviesById.fromJson(json.decode(str));
 
 final formatter = DateFormat.yMd();
 

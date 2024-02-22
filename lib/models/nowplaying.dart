@@ -2,17 +2,17 @@ import 'dart:convert';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-NowPlayingMovie nowPlayingMovieFromJson(String str) =>
-    NowPlayingMovie.fromJson(json.decode(str));
+NowPlayingMovies nowPlayingMovieFromJson(String str) =>
+    NowPlayingMovies.fromJson(json.decode(str));
 
-class NowPlayingMovie {
-  final List<MovieResult> movieResults;
+class NowPlayingMovies {
+  final List<MoviesResult> movieResults;
   final int results;
   final String totalResults;
   final String status;
   final String statusMessage;
 
-  NowPlayingMovie({
+  NowPlayingMovies({
     required this.movieResults,
     required this.results,
     required this.totalResults,
@@ -20,10 +20,10 @@ class NowPlayingMovie {
     required this.statusMessage,
   });
 
-  factory NowPlayingMovie.fromJson(Map<String, dynamic> json) =>
-      NowPlayingMovie(
-        movieResults: List<MovieResult>.from(
-            json["movie_results"].map((x) => MovieResult.fromJson(x))),
+  factory NowPlayingMovies.fromJson(Map<String, dynamic> json) =>
+      NowPlayingMovies(
+        movieResults: List<MoviesResult>.from(
+            json["movie_results"].map((x) => MoviesResult.fromJson(x))),
         results: json["results"],
         totalResults: json["Total_results"],
         status: json["status"],
@@ -31,19 +31,19 @@ class NowPlayingMovie {
       );
 }
 
-class MovieResult {
+class MoviesResult {
   final String title;
   final String year;
   final String imdbId;
   final likeStateProvider = StateProvider((ref) => false);
 
-  MovieResult({
+  MoviesResult({
     required this.title,
     required this.year,
     required this.imdbId,
   });
 
-  factory MovieResult.fromJson(Map<String, dynamic> json) => MovieResult(
+  factory MoviesResult.fromJson(Map<String, dynamic> json) => MoviesResult(
     title: json["title"],
     year: json["year"],
     imdbId: json["imdb_id"],
