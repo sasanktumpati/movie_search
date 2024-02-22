@@ -2,33 +2,43 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'package:movie_search/models/byid.dart';
+
 class LikeButton extends StatelessWidget {
-  const LikeButton({super.key});
+  final String imdbId;
+
+  const LikeButton( {Key? key, required this.imdbId}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => LikeButtonModel(),
+      create: (_) => LikeButtonModel(imdbId: imdbId),
       child: _LikeButton(),
     );
   }
 }
 
 class LikeButtonModel extends ChangeNotifier {
-  bool _isLiked = false;
+  final String imdbId;
   late SharedPreferences _prefs;
+
+  LikeButtonModel({required this.imdbId}) {
+    _initPrefs();
+  }
+
+  bool _isLiked = false;
 
   bool get isLiked => _isLiked;
 
-  Future<void> loadLikedStatus() async {
+  Future<void> _initPrefs() async {
     _prefs = await SharedPreferences.getInstance();
-    _isLiked = _prefs.getBool('liked') ?? false;
+    _isLiked = _prefs.getBool('liked_$imdbId') ?? false;
     notifyListeners();
   }
 
   Future<void> toggleLikedStatus() async {
     _isLiked = !_isLiked;
-    await _prefs.setBool('liked', _isLiked);
+    await _prefs.setBool('liked_$imdbId', _isLiked);
     notifyListeners();
   }
 }
@@ -46,3 +56,4 @@ class _LikeButton extends StatelessWidget {
     );
   }
 }
+

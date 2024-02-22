@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:movie_search/ui/homelistview.dart';
+import 'package:movie_search/ui/home.dart';
 
 
 void main() {
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: Home(),
+        home: HomeScreen(),
       ),
     );
   }
