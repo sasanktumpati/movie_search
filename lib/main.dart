@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movie_search/ui/home.dart';
+import 'package:movie_search/ui/splash.dart';
 
 
 void main() {
@@ -17,8 +18,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const ProviderScope(
-          child: HomeScreen(),
+      home: ProviderScope(
+          child: SplashScreen(),
       ),
     );
   }
