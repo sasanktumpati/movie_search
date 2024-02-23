@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_search/logic/like.dart';
 import 'package:movie_search/ui/details.dart';
+import 'package:movie_search/ui/searchbox.dart';
 
 import '../models/moviesprovider.dart';
 
@@ -53,14 +54,16 @@ class HomeScreen extends ConsumerWidget {
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => const DetailsPage(imdbID: 'movie[index].imdbId',)),
+                          MaterialPageRoute(builder: (context) => DetailsPage(imdbId: movie[index].imdbId)),
                         );
                       },
                       child: Stack(
                         children: [
                           Container(
                             margin: const EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 10),
+                              horizontal: 10,
+                              vertical: 10,
+                            ),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -71,8 +74,7 @@ class HomeScreen extends ConsumerWidget {
                                         data.poster != null
                                             ? data.poster!
                                             : 'https://i.ibb.co/S794thq/2.jpg',
-                                        errorBuilder:
-                                            (context, error, stackTrace) {
+                                        errorBuilder: (context, error, stackTrace) {
                                           return Image.network(
                                             'https://i.ibb.co/S794thq/2.jpg',
                                             gaplessPlayback: true,
@@ -82,10 +84,11 @@ class HomeScreen extends ConsumerWidget {
                                         colorBlendMode: BlendMode.darken,
                                       );
                                     },
-                                    error: (error, stackTrace) => Center(
-                                        child: Text('Error: $error')),
+                                    error: (error, stackTrace) =>
+                                        Center(child: Text('Error: $error')),
                                     loading: () => const Center(
-                                        child: CircularProgressIndicator()),
+                                      child: CircularProgressIndicator(),
+                                    ),
                                   ),
                                 ),
                                 const SizedBox(height: 10),
@@ -114,7 +117,7 @@ class HomeScreen extends ConsumerWidget {
                                       overflow: TextOverflow.fade,
                                       textAlign: TextAlign.left,
                                     ),
-                                    LikeButton(imdbId: movie[index].imdbId,),
+                                    LikeButton(imdbId: movie[index].imdbId),
                                   ],
                                 ),
                               ],
@@ -123,10 +126,12 @@ class HomeScreen extends ConsumerWidget {
                         ],
                       ),
                     );
+
                   },
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     childAspectRatio: 16/9,
-                    crossAxisCount: 2,
+                    crossAxisCount: 2
+                    ,
                   ),
                   scrollDirection: Axis.horizontal,
                 ),
@@ -166,7 +171,7 @@ class SearchBox extends ConsumerWidget {
         borderRadius: BorderRadius.circular(20),
       ),
       child: TextField(
-        autofocus: true,
+        autofocus: false,
         onChanged: (value) {
           ref.watch(searchQuery.notifier).update((state) => value);
         },
@@ -181,7 +186,13 @@ class SearchBox extends ConsumerWidget {
           ),
           border: InputBorder.none,
         ),
-        onTap: () => context.go('/searchPage'),
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => SearchScreen()),
+          );
+
+        },
       ),
     );
   }

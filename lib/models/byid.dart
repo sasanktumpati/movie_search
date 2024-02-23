@@ -10,7 +10,7 @@ class MoviesById {
   final DateTime releaseDate;
   final String? imdbId;
   final String? imdbRating;
-  final String? youtubeTrailerKey;
+  final dynamic youtubeTrailerKey;
   final String? rated;
   final String status;
   final String statusMessage;

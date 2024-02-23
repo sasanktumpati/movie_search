@@ -1,38 +1,12 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:movie_search/ui/details.dart';
 
 import '../models/moviesprovider.dart';
-import 'home.dart';
-
-void main() {
-  WidgetsFlutterBinding.ensureInitialized();
-  runApp(
-    ProviderScope(
-      child: MyApp(),
-    ),
-  );
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Movie Search',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-
-      home: const ProviderScope(
-        child: SearchScreen(),
-      ),
-    );
-  }
-}
 
 class SearchScreen extends ConsumerWidget {
-  const SearchScreen({Key? key}) : super(key: key);
+  const SearchScreen({super.key});
 
   @override
   Widget build(BuildContext ctx, WidgetRef ref) {
@@ -42,12 +16,18 @@ class SearchScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          onPressed: () {
-            ctx.pop();
+            onPressed: () {
+              ctx.pop();
+            },
+            icon: const Icon(Icons.arrow_back_outlined)),
+        title: TextField(
+          autofocus: true,
+          onChanged: (value) {
+            ref
+                .watch(searchQuery.notifier)
+                .update((state) => value);
           },
-          icon: const Icon(Icons.arrow_back_outlined),
         ),
-        title: const SearchBox(),
       ),
       body: moviesList.when(
         data: (data) {
@@ -63,16 +43,14 @@ class SearchScreen extends ConsumerWidget {
               itemBuilder: (context, index) {
                 return ListTile(
                   title: Text(
-                    data.movieResults![index].title != null
-                        ? data.movieResults![index].title!
-                        : "",
-                  ),
+                      data.movieResults![index].title != null
+                          ? data.movieResults![index].title!
+                          : ""),
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => DetailsPage(imdbID: 'movie[index].imdbId',)),
-                    );
-
+                    ctx.push("/page2");
+                    ref
+                        .watch(SelectionProvider.notifier)
+                        .update((state) => data.movieResults![index].imdbId!);
                   },
                 );
               },
