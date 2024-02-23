@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_search/logic/like.dart';
+import 'package:movie_search/ui/details.dart';
 
 import '../models/moviesprovider.dart';
 
@@ -50,9 +51,9 @@ class HomeScreen extends ConsumerWidget {
 
                     return GestureDetector(
                       onTap: () {
-                        context.go('/details');
-                        ref.watch(SelectionProvider.notifier).update(
-                              (state) => movie[index].imdbId,
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const DetailsPage(imdbID: 'movie[index].imdbId',)),
                         );
                       },
                       child: Stack(

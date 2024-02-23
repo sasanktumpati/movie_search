@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:movie_search/ui/details.dart';
 
 import '../models/moviesprovider.dart';
 import 'home.dart';
@@ -67,10 +68,11 @@ class SearchScreen extends ConsumerWidget {
                         : "",
                   ),
                   onTap: () {
-                    context.push("/details");
-                    ref.watch(SelectionProvider.notifier).update(
-                          (state) => data.movieResults![index].imdbId!,
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => DetailsPage(imdbID: 'movie[index].imdbId',)),
                     );
+
                   },
                 );
               },

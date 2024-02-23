@@ -13,14 +13,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Movie Search',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: ProviderScope(
-          child: SplashScreen(),
+    return ProviderScope(
+      child: MaterialApp(
+        title: 'Movie Search',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: const HomeScreen()
       ),
     );
+
   }
 }

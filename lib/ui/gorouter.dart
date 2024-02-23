@@ -40,7 +40,7 @@ final _router = GoRouter(
     ),
     GoRoute(
       path: '/details',
-      builder: (context, state) => const Details_page(),
+      builder: (context, state) => const DetailsPage(),
     ),
     GoRoute(
       path: '/search',

@@ -49,6 +49,7 @@ dependencies:
   flutter_riverpod: ^2.4.10
   intl: ^0.18.1
   flutter_rating_stars: ^1.0.3+4
+  flutter_native_splash: ^2.3.13
 
 
 dev_dependencies:
