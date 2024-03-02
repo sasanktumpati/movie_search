@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "564332808749",
+    "project_id": "movie-search-77ba5",
+    "storage_bucket": "movie-search-77ba5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:564332808749:android:6fba2c6ce260ec3fd386a4",
+        "android_client_info": {
+          "package_name": "com.sasanktumpati.movie_search"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "564332808749-tko8fn4p7mpjt75lllhqj8lq784i9ta8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sasanktumpati.movie_search",
+            "certificate_hash": "1ca71f706d257a67f0e68fdb706225193b97647c"
+          }
+        },
+        {
+          "client_id": "564332808749-l9dllmtcfo3agn6nmqe2t0igel33l70c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBiFgVJqLVrZqoordel04KwSGGp416qs7g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "564332808749-l9dllmtcfo3agn6nmqe2t0igel33l70c.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "564332808749-bu18c66g5bdnlsp7hqqcfgiohgv4irqk.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.sasanktumpati.movieSearch"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -3,8 +3,8 @@ import 'package:go_router/go_router.dart';
 import 'package:movie_search/ui/searchbox.dart';
 import 'package:movie_search/ui/splash.dart';
 
-import 'details.dart';
-import 'home.dart';
+import 'ui/details.dart';
+import 'ui/home.dart';
 
 class Routing extends StatelessWidget {
   const Routing({Key? key});
@@ -40,7 +40,9 @@ final _router = GoRouter(
     ),
     GoRoute(
       path: '/details',
-      builder: (context, state) => const DetailsPage(),
+      builder: (context, state) => const DetailsPage(
+        imdbId: '',
+      ),
     ),
     GoRoute(
       path: '/search',
