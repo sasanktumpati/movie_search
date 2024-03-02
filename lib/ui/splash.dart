@@ -18,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(seconds: 2), () {
+    Future.delayed(Duration(seconds: 1000), () {
       SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
 
       if (FirebaseAuth.instance.currentUser != null) {
@@ -52,21 +52,9 @@ class _SplashScreenState extends State<SplashScreen> {
               child: Text(
                 'Movie Search',
                 style: TextStyle(
-                    fontSize: height * 0.05, fontWeight: FontWeight.bold),
-              ),
-            ),
-          ),
-          Positioned(
-            top: height * 0.23,
-            left: 0,
-            right: 0,
-            child: Center(
-              child: Text(
-                'Stay Linked, Stay Connected',
-                style: TextStyle(
-                    fontSize: height * 0.025,
+                    fontSize: height * 0.05,
                     fontWeight: FontWeight.bold,
-                    color: secColor),
+                    color: primaryColor),
               ),
             ),
           ),
@@ -79,17 +67,17 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
           ),
           Positioned(
-            top: height * 0.9,
+            top: height * 0.85,
             left: width * 0.01,
             right: width * 0.01,
             height: height * 0.08,
             child: Center(
               child: Text(
-                'Sasank Tumpati',
+                'SUTT Task-3',
                 style: TextStyle(
                   color: primaryColor,
-                  fontWeight: FontWeight.w100,
-                  fontSize: height * 0.03,
+                  fontWeight: FontWeight.bold,
+                  fontSize: height * 0.05,
                 ),
               ),
             ),

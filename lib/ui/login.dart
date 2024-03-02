@@ -65,23 +65,11 @@ class _LoginScreenState extends State<LoginScreen> {
             right: 0,
             child: Center(
               child: Text(
-                'Connect',
+                'Movie Search',
                 style: TextStyle(
-                    fontSize: height * 0.05, fontWeight: FontWeight.bold),
-              ),
-            ),
-          ),
-          Positioned(
-            top: height * 0.23,
-            left: 0,
-            right: 0,
-            child: Center(
-              child: Text(
-                'Stay Linked, Stay Connected',
-                style: TextStyle(
-                    fontSize: height * 0.025,
+                    fontSize: height * 0.05,
                     fontWeight: FontWeight.bold,
-                    color: secColor),
+                    color: primaryColor),
               ),
             ),
           ),
@@ -90,7 +78,7 @@ class _LoginScreenState extends State<LoginScreen> {
             left: width * 0.05,
             right: width * 0.05,
             child: Center(
-              child: Image.asset('assets/1.png'),
+              child: Image.asset('assets/logo.png'),
             ),
           ),
           Positioned(
@@ -104,14 +92,14 @@ class _LoginScreenState extends State<LoginScreen> {
               },
               icon: Image.asset(
                 'assets/google.png',
-                scale: 18,
+                scale: height * 0.023,
               ),
               label: Text(
                 'Login with Google',
                 style: TextStyle(
                     color: backColor,
                     fontWeight: FontWeight.bold,
-                    fontSize: height * 0.024),
+                    fontSize: height * 0.023),
               ),
               style: ElevatedButton.styleFrom(
                 backgroundColor: primaryColor,
