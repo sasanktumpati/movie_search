@@ -9,15 +9,15 @@ import 'getimages.dart';
 import 'nowplaying.dart';
 
 final ImagesProvider =
-FutureProvider.family<MovieImages, String>((ref, movieId) async {
+    FutureProvider.family<MovieImages, String>((ref, movieId) async {
   var headers = {
     'Type': 'get-movies-images-by-imdb',
-    'X-RapidAPI-Key': '6aefda3735msh2903a5bb92a6a6ap137028jsn001fd8aa9f35',
+    'X-RapidAPI-Key': 'f0dc26a346mshfb08638ddac48fcp1ef76bjsn673e97ac5507',
     'X-RapidAPI-Host': 'movies-tv-shows-database.p.rapidapi.com',
   };
 
-  var uri = Uri.https('movies-tv-shows-database.p.rapidapi.com', '/',
-      {'movieid': movieId});
+  var uri = Uri.https(
+      'movies-tv-shows-database.p.rapidapi.com', '/', {'movieid': movieId});
 
   var response = await http.get(uri, headers: headers);
 
@@ -30,17 +30,15 @@ FutureProvider.family<MovieImages, String>((ref, movieId) async {
   }
 });
 
-
-
 final nowPlayingProvider = FutureProvider<NowPlayingMovies>((ref) async {
   var headers = {
     'Type': 'get-nowplaying-movies',
-    'X-RapidAPI-Key': '6aefda3735msh2903a5bb92a6a6ap137028jsn001fd8aa9f35',
+    'X-RapidAPI-Key': 'f0dc26a346mshfb08638ddac48fcp1ef76bjsn673e97ac5507',
     'X-RapidAPI-Host': 'movies-tv-shows-database.p.rapidapi.com',
   };
 
-  var uri = Uri.https(
-      'movies-tv-shows-database.p.rapidapi.com', '/', {'page': '1'});
+  var uri =
+      Uri.https('movies-tv-shows-database.p.rapidapi.com', '/', {'page': '1'});
 
   var response = await http.get(uri, headers: headers);
 
@@ -54,10 +52,10 @@ final nowPlayingProvider = FutureProvider<NowPlayingMovies>((ref) async {
 });
 
 final getMoviesByNameProvider =
-FutureProvider.family<ByTitleResults, String>((ref, inputText) async {
+    FutureProvider.family<ByTitleResults, String>((ref, inputText) async {
   var headers = {
     'Type': 'get-movies-by-title',
-    'X-RapidAPI-Key': '6aefda3735msh2903a5bb92a6a6ap137028jsn001fd8aa9f35',
+    'X-RapidAPI-Key': 'f0dc26a346mshfb08638ddac48fcp1ef76bjsn673e97ac5507',
     'X-RapidAPI-Host': 'movies-tv-shows-database.p.rapidapi.com',
   };
 
@@ -78,10 +76,10 @@ FutureProvider.family<ByTitleResults, String>((ref, inputText) async {
 final SelectionProvider = StateProvider((ref) => "");
 
 final getMoviesByIDProvider =
-FutureProvider.family<MoviesById, String>((ref, imdbID) async {
+    FutureProvider.family<MoviesById, String>((ref, imdbID) async {
   var headers = {
     'Type': 'get-movie-details',
-    'X-RapidAPI-Key': '6aefda3735msh2903a5bb92a6a6ap137028jsn001fd8aa9f35',
+    'X-RapidAPI-Key': 'f0dc26a346mshfb08638ddac48fcp1ef76bjsn673e97ac5507',
     'X-RapidAPI-Host': 'movies-tv-shows-database.p.rapidapi.com',
   };
 
@@ -107,12 +105,12 @@ class Repo {
   Future<ByTitleResults> fetchMoviesData() async {
     var headers = {
       'Type': 'get-movies-by-title',
-      'X-RapidAPI-Key': '6aefda3735msh2903a5bb92a6a6ap137028jsn001fd8aa9f35',
+      'X-RapidAPI-Key': 'f0dc26a346mshfb08638ddac48fcp1ef76bjsn673e97ac5507',
       'X-RapidAPI-Host': 'movies-tv-shows-database.p.rapidapi.com',
     };
 
-    var uri = Uri.https('movies-tv-shows-database.p.rapidapi.com', '/',
-        {'title': movieTitle});
+    var uri = Uri.https(
+        'movies-tv-shows-database.p.rapidapi.com', '/', {'title': movieTitle});
 
     var response = await http.get(uri, headers: headers);
 
@@ -128,10 +126,10 @@ class Repo {
 
 final showDescriptionProvider = StateProvider<bool>((ref) => true);
 
-
 final searchQuery = StateProvider((ref) => "");
 
-final searchQueryProvider = StateNotifierProvider<SearchQueryNotifier, String>((ref) {
+final searchQueryProvider =
+    StateNotifierProvider<SearchQueryNotifier, String>((ref) {
   return SearchQueryNotifier();
 });
 

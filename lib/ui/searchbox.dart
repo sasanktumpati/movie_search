@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -9,7 +8,7 @@ class SearchScreen extends ConsumerWidget {
   const SearchScreen({super.key});
 
   @override
-  Widget build(BuildContext ctx, WidgetRef ref) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final searchText = ref.watch(searchQuery);
     final moviesList = ref.watch(getMoviesByNameProvider(searchText));
 
@@ -17,15 +16,13 @@ class SearchScreen extends ConsumerWidget {
       appBar: AppBar(
         leading: IconButton(
             onPressed: () {
-              ctx.pop();
+              Navigator.of(context).pop();
             },
             icon: const Icon(Icons.arrow_back_outlined)),
         title: TextField(
           autofocus: true,
           onChanged: (value) {
-            ref
-                .watch(searchQuery.notifier)
-                .update((state) => value);
+            ref.watch(searchQuery.notifier).update((state) => value);
           },
         ),
       ),
@@ -42,12 +39,11 @@ class SearchScreen extends ConsumerWidget {
               itemCount: data.movieResults!.length,
               itemBuilder: (context, index) {
                 return ListTile(
-                  title: Text(
-                      data.movieResults![index].title != null
-                          ? data.movieResults![index].title!
-                          : ""),
+                  title: Text(data.movieResults![index].title != null
+                      ? data.movieResults![index].title!
+                      : ""),
                   onTap: () {
-                    ctx.push("/page2");
+                    context.push("/page2");
                     ref
                         .watch(SelectionProvider.notifier)
                         .update((state) => data.movieResults![index].imdbId!);
