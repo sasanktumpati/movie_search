@@ -24,4 +24,5 @@ Future<UserCredential?> signInWithGoogle() async {
       print('Sign In: $e');
     }
   }
+  return null;
 }
