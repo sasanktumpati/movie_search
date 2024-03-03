@@ -29,12 +29,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ProviderScope(
-      child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          theme: defMode,
-          title: 'Movie Search',
-          home: SplashScreen()),
+    return PopScope(
+      child: ProviderScope(
+        child: MaterialApp(
+            debugShowCheckedModeBanner: false,
+            theme: defMode,
+            title: 'Movie Search',
+            home: SplashScreen()),
+      ),
     );
   }
 }

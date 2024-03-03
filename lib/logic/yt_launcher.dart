@@ -5,7 +5,7 @@ Future<void> openTrailer(dynamic youtubeTrailerKey) async {
 
   if (url.isNotEmpty) {
     if (await canLaunchUrl(Uri.parse(url))) {
-      await launchUrl(Uri.parse(url));
+      await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
     } else {
       throw 'Could Not launch $url';
     }
