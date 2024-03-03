@@ -7,8 +7,7 @@ import 'package:movie_search/logic/like.dart';
 import 'package:movie_search/ui/details.dart';
 import 'package:movie_search/ui/searchbox.dart';
 
-import '../models/moviesprovider.dart';
-
+import '../services/moviesprovider.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -34,9 +33,9 @@ class HomeScreen extends ConsumerWidget {
               Text(
                 "Now Playing",
                 style: GoogleFonts.poppins(
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold,
-                ),
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black),
               ),
               const SizedBox(height: 10),
               Expanded(
@@ -47,14 +46,15 @@ class HomeScreen extends ConsumerWidget {
                   itemBuilder: (context, index) {
                     final String movieId = movie[index].imdbId;
 
-                    final movieImage =
-                    ref.watch(ImagesProvider(movieId));
+                    final movieImage = ref.watch(ImagesProvider(movieId));
 
                     return GestureDetector(
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => DetailsPage(imdbId: movie[index].imdbId)),
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  DetailsPage(imdbId: movie[index].imdbId)),
                         );
                       },
                       child: Stack(
@@ -74,7 +74,8 @@ class HomeScreen extends ConsumerWidget {
                                         data.poster != null
                                             ? data.poster!
                                             : 'https://i.ibb.co/S794thq/2.jpg',
-                                        errorBuilder: (context, error, stackTrace) {
+                                        errorBuilder:
+                                            (context, error, stackTrace) {
                                           return Image.network(
                                             'https://i.ibb.co/S794thq/2.jpg',
                                             gaplessPlayback: true,
@@ -104,7 +105,8 @@ class HomeScreen extends ConsumerWidget {
                                   textAlign: TextAlign.left,
                                 ),
                                 Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       movie[index].year,
@@ -126,12 +128,10 @@ class HomeScreen extends ConsumerWidget {
                         ],
                       ),
                     );
-
                   },
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    childAspectRatio: 16/9,
-                    crossAxisCount: 2
-                    ,
+                    childAspectRatio: 16 / 9,
+                    crossAxisCount: 2,
                   ),
                   scrollDirection: Axis.horizontal,
                 ),
@@ -139,8 +139,11 @@ class HomeScreen extends ConsumerWidget {
             ],
           );
         },
-        error: (error, stackTrace) =>
-            Center(child: Text('Error: $error')),
+        error: (error, stackTrace) => Center(
+            child: Text(
+          'Error: $error',
+          style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+        )),
         loading: () => const Center(child: CircularProgressIndicator()),
       ),
     );
@@ -177,7 +180,8 @@ class SearchBox extends ConsumerWidget {
         },
         decoration: InputDecoration(
           icon: const Icon(Icons.search),
-          contentPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+          contentPadding:
+              const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
           hintText: "Search Movies...",
           hintStyle: GoogleFonts.poppins(
             fontWeight: FontWeight.bold,
@@ -191,11 +195,8 @@ class SearchBox extends ConsumerWidget {
             context,
             MaterialPageRoute(builder: (context) => SearchScreen()),
           );
-
         },
       ),
     );
   }
 }
-
-

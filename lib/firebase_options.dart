@@ -63,8 +63,10 @@ class DefaultFirebaseOptions {
     messagingSenderId: '564332808749',
     projectId: 'movie-search-77ba5',
     storageBucket: 'movie-search-77ba5.appspot.com',
-    androidClientId: '564332808749-tko8fn4p7mpjt75lllhqj8lq784i9ta8.apps.googleusercontent.com',
-    iosClientId: '564332808749-bu18c66g5bdnlsp7hqqcfgiohgv4irqk.apps.googleusercontent.com',
+    androidClientId:
+        '564332808749-tko8fn4p7mpjt75lllhqj8lq784i9ta8.apps.googleusercontent.com',
+    iosClientId:
+        '564332808749-bu18c66g5bdnlsp7hqqcfgiohgv4irqk.apps.googleusercontent.com',
     iosBundleId: 'com.sasanktumpati.movieSearch',
   );
 }

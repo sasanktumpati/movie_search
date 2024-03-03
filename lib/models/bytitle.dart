@@ -17,12 +17,12 @@ class MoviesByTitle {
   });
 
   factory MoviesByTitle.fromJson(Map<String, dynamic> json) => MoviesByTitle(
-    movieResults: List<ByTitleResults>.from(
-        json["movie_results"].map((x) => ByTitleResults.fromJson(x))),
-    searchResults: json["search_results"],
-    status: json["status"],
-    statusMessage: json["status_message"],
-  );
+        movieResults: List<ByTitleResults>.from(
+            json["movie_results"].map((x) => ByTitleResults.fromJson(x))),
+        searchResults: json["search_results"],
+        status: json["status"],
+        statusMessage: json["status_message"],
+      );
 }
 
 class ByTitleResults {
@@ -38,13 +38,10 @@ class ByTitleResults {
     required this.searchResults,
   });
 
-  factory ByTitleResults.fromJson(Map<String, dynamic> json) =>
-      ByTitleResults(
+  factory ByTitleResults.fromJson(Map<String, dynamic> json) => ByTitleResults(
         title: json["title"],
         year: json["year"],
         imdbId: json["imdb_id"],
         searchResults: json["search_results"],
       );
-
-  List<ByTitleResults> get movieResults => [this];
 }

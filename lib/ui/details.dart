@@ -10,7 +10,7 @@ import 'package:movie_search/logic/star_rating.dart';
 import '../logic/yt_launcher.dart';
 import '../models/byid.dart';
 import '../models/getimages.dart';
-import '../models/moviesprovider.dart';
+import '../services/moviesprovider.dart';
 
 class DetailsPage extends ConsumerWidget {
   final String? imdbId;

@@ -3,16 +3,16 @@ import 'dart:convert';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 
-import 'byid.dart';
-import 'bytitle.dart';
-import 'getimages.dart';
-import 'nowplaying.dart';
+import '../models/byid.dart';
+import '../models/bytitle.dart';
+import '../models/getimages.dart';
+import '../models/nowplaying.dart';
 
 final ImagesProvider =
     FutureProvider.family<MovieImages, String>((ref, movieId) async {
   var headers = {
     'Type': 'get-movies-images-by-imdb',
-    'X-RapidAPI-Key': 'f0dc26a346mshfb08638ddac48fcp1ef76bjsn673e97ac5507',
+    'X-RapidAPI-Key': '642ff82731mshb9284b2cfc87479p1aeeadjsn077ad2578941',
     'X-RapidAPI-Host': 'movies-tv-shows-database.p.rapidapi.com',
   };
 
@@ -33,7 +33,7 @@ final ImagesProvider =
 final nowPlayingProvider = FutureProvider<NowPlayingMovies>((ref) async {
   var headers = {
     'Type': 'get-nowplaying-movies',
-    'X-RapidAPI-Key': 'f0dc26a346mshfb08638ddac48fcp1ef76bjsn673e97ac5507',
+    'X-RapidAPI-Key': '642ff82731mshb9284b2cfc87479p1aeeadjsn077ad2578941',
     'X-RapidAPI-Host': 'movies-tv-shows-database.p.rapidapi.com',
   };
 
@@ -52,10 +52,10 @@ final nowPlayingProvider = FutureProvider<NowPlayingMovies>((ref) async {
 });
 
 final getMoviesByNameProvider =
-    FutureProvider.family<ByTitleResults, String>((ref, inputText) async {
+    FutureProvider.family<MoviesByTitle, String>((ref, inputText) async {
   var headers = {
     'Type': 'get-movies-by-title',
-    'X-RapidAPI-Key': 'f0dc26a346mshfb08638ddac48fcp1ef76bjsn673e97ac5507',
+    'X-RapidAPI-Key': '642ff82731mshb9284b2cfc87479p1aeeadjsn077ad2578941',
     'X-RapidAPI-Host': 'movies-tv-shows-database.p.rapidapi.com',
   };
 
@@ -67,7 +67,7 @@ final getMoviesByNameProvider =
   if (response.statusCode == 200) {
     var responseData = jsonDecode(response.body);
     print('Movies by title response: $responseData');
-    return ByTitleResults.fromJson(responseData);
+    return MoviesByTitle.fromJson(responseData);
   } else {
     throw Exception('Failed to fetch movies by title');
   }
@@ -79,7 +79,7 @@ final getMoviesByIDProvider =
     FutureProvider.family<MoviesById, String>((ref, imdbID) async {
   var headers = {
     'Type': 'get-movie-details',
-    'X-RapidAPI-Key': 'f0dc26a346mshfb08638ddac48fcp1ef76bjsn673e97ac5507',
+    'X-RapidAPI-Key': '642ff82731mshb9284b2cfc87479p1aeeadjsn077ad2578941',
     'X-RapidAPI-Host': 'movies-tv-shows-database.p.rapidapi.com',
   };
 
@@ -105,7 +105,7 @@ class Repo {
   Future<ByTitleResults> fetchMoviesData() async {
     var headers = {
       'Type': 'get-movies-by-title',
-      'X-RapidAPI-Key': 'f0dc26a346mshfb08638ddac48fcp1ef76bjsn673e97ac5507',
+      'X-RapidAPI-Key': '642ff82731mshb9284b2cfc87479p1aeeadjsn077ad2578941',
       'X-RapidAPI-Host': 'movies-tv-shows-database.p.rapidapi.com',
     };
 

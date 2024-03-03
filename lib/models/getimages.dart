@@ -14,14 +14,12 @@ class MovieImages {
     required this.imdb,
     required this.poster,
     required this.fanart,
-
   });
 
   factory MovieImages.fromJson(Map<String, dynamic> json) => MovieImages(
-    title: json["title"],
-    imdb: json["IMDB"],
-    poster: json["poster"],
-    fanart: json["fanart"],
-
-  );
+        title: json["title"],
+        imdb: json["IMDB"],
+        poster: json["poster"],
+        fanart: json["fanart"],
+      );
 }

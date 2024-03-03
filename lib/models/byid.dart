@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:intl/intl.dart';
 
-
 class MoviesById {
   final String? title;
   final String? description;
@@ -30,29 +29,25 @@ class MoviesById {
   });
 
   factory MoviesById.fromJson(Map<String, dynamic> json) => MoviesById(
-    title: json["title"],
-    description: json["description"],
-    tagline: json["tagline"],
-    year: json["year"],
-    releaseDate: DateTime.parse(json["release_date"]),
-    imdbId: json["imdb_id"],
-    imdbRating: json["imdb_rating"],
-    youtubeTrailerKey: json["youtube_trailer_key"],
-    rated: json["rated"],
-    status: json["status"],
-    statusMessage: json["status_message"],
-  );
+        title: json["title"],
+        description: json["description"],
+        tagline: json["tagline"],
+        year: json["year"],
+        releaseDate: DateTime.parse(json["release_date"]),
+        imdbId: json["imdb_id"],
+        imdbRating: json["imdb_rating"],
+        youtubeTrailerKey: json["youtube_trailer_key"],
+        rated: json["rated"],
+        status: json["status"],
+        statusMessage: json["status_message"],
+      );
 
   String get formattedDate {
     return formatter.format(releaseDate);
   }
 }
 
-
-MoviesById movieByIdFromJson(String str) => MoviesById.fromJson(json.decode(str));
+MoviesById movieByIdFromJson(String str) =>
+    MoviesById.fromJson(json.decode(str));
 
 final formatter = DateFormat.yMd();
-
-
-
-
