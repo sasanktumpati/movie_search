@@ -115,7 +115,7 @@ class DetailsPage extends ConsumerWidget {
                             ),
                             IconButton(
                               onPressed: () {
-                                openTrailer(data.youtubeTrailerKey);
+                                openTrailer('${data.youtubeTrailerKey}');
                               },
                               tooltip: "Play Trailer",
                               icon: const Icon(Icons.play_circle_fill,
