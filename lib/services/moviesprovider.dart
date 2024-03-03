@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 
@@ -23,7 +24,9 @@ final ImagesProvider =
 
   if (response.statusCode == 200) {
     var responseData = jsonDecode(response.body);
-    print('Movie images response: $responseData');
+    if (kDebugMode) {
+      print('Movie images response: $responseData');
+    }
     return MovieImages.fromJson(responseData);
   } else {
     throw Exception('Failed to load images');
