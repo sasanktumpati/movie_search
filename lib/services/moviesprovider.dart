@@ -47,7 +47,6 @@ final nowPlayingProvider = FutureProvider<NowPlayingMovies>((ref) async {
 
   if (response.statusCode == 200) {
     var responseData = jsonDecode(response.body);
-    print('Now playing movies response: $responseData');
     return NowPlayingMovies.fromJson(responseData);
   } else {
     throw Exception('Failed to fetch now playing movies');
@@ -69,7 +68,6 @@ final getMoviesByNameProvider =
 
   if (response.statusCode == 200) {
     var responseData = jsonDecode(response.body);
-    print('Movies by title response: $responseData');
     return MoviesByTitle.fromJson(responseData);
   } else {
     throw Exception('Failed to fetch movies by title');
@@ -93,7 +91,6 @@ final getMoviesByIDProvider =
 
   if (response.statusCode == 200) {
     var responseData = jsonDecode(response.body);
-    print('Movie details response: $responseData');
     return MoviesById.fromJson(responseData);
   } else {
     throw Exception('Failed to load movie details');
@@ -119,7 +116,6 @@ class Repo {
 
     if (response.statusCode == 200) {
       var responseData = jsonDecode(response.body);
-      print('Fetch movies data response: $responseData');
       return ByTitleResults.fromJson(responseData);
     } else {
       throw Exception('Failed to fetch movies by title');

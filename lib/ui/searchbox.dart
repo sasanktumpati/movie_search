@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:movie_search/ui/details.dart';
 
 import '../services/moviesprovider.dart';
@@ -15,11 +14,8 @@ class SearchScreen extends ConsumerWidget {
     final moviesList = ref.watch(getMoviesByNameProvider(searchText));
 
     final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
 
-    final backColor = Theme.of(context).colorScheme.background;
     final primaryColor = Theme.of(context).colorScheme.primary;
-    final secColor = Theme.of(context).colorScheme.secondary;
 
     return Scaffold(
       appBar: AppBar(

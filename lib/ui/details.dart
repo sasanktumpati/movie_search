@@ -1,7 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -20,7 +18,6 @@ class DetailsPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
     if (kDebugMode) {
       print('\n height : ${height} \n');
     }
@@ -118,7 +115,6 @@ class DetailsPage extends ConsumerWidget {
                             ),
                             IconButton(
                               onPressed: () {
-                                print(data.youtubeTrailerKey);
                                 openTrailer(data.youtubeTrailerKey);
                               },
                               tooltip: "Play Trailer",
