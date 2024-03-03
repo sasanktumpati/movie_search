@@ -1,5 +1,3 @@
-import 'dart:math';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -53,7 +51,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
     final backColor = Theme.of(context).colorScheme.background;
     final primaryColor = Theme.of(context).colorScheme.primary;
-    final secColor = Theme.of(context).colorScheme.secondary;
 
     return Scaffold(
       backgroundColor: backColor,
