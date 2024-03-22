@@ -13,7 +13,7 @@ final ImagesProvider =
     FutureProvider.family<MovieImages, String>((ref, movieId) async {
   var headers = {
     'Type': 'get-movies-images-by-imdb',
-    'X-RapidAPI-Key': '642ff82731mshb9284b2cfc87479p1aeeadjsn077ad2578941',
+    'X-RapidAPI-Key': 'd98a1a785emsh1bed97a2356f5cdp129e68jsndaa66b0ec184',
     'X-RapidAPI-Host': 'movies-tv-shows-database.p.rapidapi.com',
   };
 
@@ -36,7 +36,7 @@ final ImagesProvider =
 final nowPlayingProvider = FutureProvider<NowPlayingMovies>((ref) async {
   var headers = {
     'Type': 'get-nowplaying-movies',
-    'X-RapidAPI-Key': '642ff82731mshb9284b2cfc87479p1aeeadjsn077ad2578941',
+    'X-RapidAPI-Key': 'd98a1a785emsh1bed97a2356f5cdp129e68jsndaa66b0ec184',
     'X-RapidAPI-Host': 'movies-tv-shows-database.p.rapidapi.com',
   };
 
@@ -57,7 +57,7 @@ final getMoviesByNameProvider =
     FutureProvider.family<MoviesByTitle, String>((ref, inputText) async {
   var headers = {
     'Type': 'get-movies-by-title',
-    'X-RapidAPI-Key': '642ff82731mshb9284b2cfc87479p1aeeadjsn077ad2578941',
+    'X-RapidAPI-Key': 'd98a1a785emsh1bed97a2356f5cdp129e68jsndaa66b0ec184',
     'X-RapidAPI-Host': 'movies-tv-shows-database.p.rapidapi.com',
   };
 
@@ -80,7 +80,7 @@ final getMoviesByIDProvider =
     FutureProvider.family<MoviesById, String>((ref, imdbID) async {
   var headers = {
     'Type': 'get-movie-details',
-    'X-RapidAPI-Key': '642ff82731mshb9284b2cfc87479p1aeeadjsn077ad2578941',
+    'X-RapidAPI-Key': 'd98a1a785emsh1bed97a2356f5cdp129e68jsndaa66b0ec184',
     'X-RapidAPI-Host': 'movies-tv-shows-database.p.rapidapi.com',
   };
 
@@ -105,7 +105,7 @@ class Repo {
   Future<ByTitleResults> fetchMoviesData() async {
     var headers = {
       'Type': 'get-movies-by-title',
-      'X-RapidAPI-Key': '642ff82731mshb9284b2cfc87479p1aeeadjsn077ad2578941',
+      'X-RapidAPI-Key': 'd98a1a785emsh1bed97a2356f5cdp129e68jsndaa66b0ec184',
       'X-RapidAPI-Host': 'movies-tv-shows-database.p.rapidapi.com',
     };
 
@@ -137,3 +137,5 @@ class SearchQueryNotifier extends StateNotifier<String> {
 
   void update(String newValue) => state = newValue;
 }
+
+final likeStatus = StateProvider<bool>((ref) => true);

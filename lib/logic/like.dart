@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 class LikeButton extends StatelessWidget {
   final String imdbId;
 
-  const LikeButton( {Key? key, required this.imdbId}) : super(key: key);
+  const LikeButton({Key? key, required this.imdbId}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -55,4 +54,3 @@ class _LikeButton extends StatelessWidget {
     );
   }
 }
-
